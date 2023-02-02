@@ -10,7 +10,6 @@ function Home() {
     router.push("/shop")
   }
   return (
-    <div>
       <main className={styles.main} >
         <Bubble top = {"-300px"} left = {"-350px"} rotate = {10}/>
         <div className={styles.elemContainer}>
@@ -20,13 +19,12 @@ function Home() {
           <h2> Anything.</h2>
           <h2>For everything.</h2>
           <div className={styles.buttonContainer}>
-            <Button name = {"shop"} handleClick = {handleClick}/>
+            <Button name = {"shop"} padding = {"20px 40px"} handleClick = {handleClick}/>
           </div>
           </div>
         </div>
         <Bubble rotate={180} justify={"end"} align={"end"} bottom={"-300px"} right={"-300px"}/>
       </main>
-    </div>
   );
 }
 

@@ -1,10 +1,10 @@
 export default function Button(props){
     return (
         <button style={{
-            padding : "20px 40px",
+            padding : props.padding,
             backgroundColor : "#7b96d4",
             borderWidth : 0, 
-            fontSize : "1.5rem",
+            fontSize : "1.25rem",
             color : "white", 
             borderRadius : "50px",
             cursor : "pointer"

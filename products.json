@@ -1,0 +1,39 @@
+[
+    {
+        "name" : "Fame",
+        "description" : "I guarantee that I will make you famous if you spend that much money on a fake website",
+        "price" : 1000000,
+        "availability" : true
+    },
+    {
+        "name" : "Wealth",
+        "description" : "Money, money, money. Must be funny. In the rich man's world",
+        "price" : 50000, 
+        "availability" : false
+    }, 
+    {
+        "name" : "Hapiness",
+        "description" : "A state of emotional well-being that a person experiences either when good things happen in a specific moment, as a positive evaluation of one's life that is, subjective well-being.",
+        "price" : 0, 
+        "availability" : true
+    },
+    {
+        "name" : "Purpose", 
+        "description" : "the reason for which something is done or created or for which something exists.",
+        "price" : 0, 
+        "availability" : true
+    },
+    {
+        "name" : "Loremipsum", 
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur",
+        "price" : 0, 
+        "availability" : true
+    }, 
+    {
+        "name" : "Loremipsum", 
+        "description" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur",
+        "price" : 0, 
+        "availability" : true
+    } 
+
+]

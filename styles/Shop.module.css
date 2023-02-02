@@ -1,0 +1,35 @@
+.main {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  .titleContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15vh;
+  }
+
+  .titleContainer h1{
+    font-size: 4.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+  }
+  
+  .titleContainer h2{
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0;
+    text-align: left;
+  }
+
+  .itemsContainer{
+    margin-top: 15vh;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }

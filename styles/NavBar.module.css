@@ -1,0 +1,11 @@
+.bar{
+    height : 7vh; 
+    display:flex; 
+    width : 100%; 
+    padding : 1vh; 
+    justify-content : right
+}
+
+.bar * {
+    margin: 5px 20px ;
+}
