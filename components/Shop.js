@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import products from "../products.json"
 
 export default function Shop() {
-
     const [productList, setProductList] = useState([])
-
     
     useEffect(() => {
     setProductList(products.map((data, i) =>
