@@ -18,7 +18,7 @@ export default function Product() {
   );
 
   const  handleClick = () => {
-    dispatch(addProductToCart(productSelected))
+    dispatch(addProductToCart({...productSelected, quantity : 1}))
     setModalVisible(true)
   }
 
