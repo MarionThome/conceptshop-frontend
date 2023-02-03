@@ -5,11 +5,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import products from "../reducers/products";
 import { PersistGate } from 'redux-persist/integration/react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import storage from 'redux-persist/lib/storage';
 
 
 const reducers = combineReducers({ products }); // permet d'enregistrer les reducers
-const persistConfig = { key: 'ConceptStore', AsyncStorage };
+const persistConfig = { key: 'ConceptStore', storage };
 
 // configuration du store
 const store = configureStore({

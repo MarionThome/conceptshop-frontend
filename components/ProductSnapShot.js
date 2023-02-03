@@ -2,8 +2,11 @@ import Button from "./Button";
 import styles from "../styles/ProductSnapShot.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { selectProductToShow } from "../reducers/products";
 
 export default function ProductSnapShot(props) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [image, setImage] = useState("");
   useEffect(() => {
@@ -12,7 +15,10 @@ export default function ProductSnapShot(props) {
   }, []);
 
   const handleClick = () => {
-    router.push(`/product/`);
+    dispatch(selectProductToShow(props.data))
+    setTimeout(() => {
+        router.push(`/product/`);
+    }, 500)
   };
 
   return (
@@ -34,7 +40,11 @@ export default function ProductSnapShot(props) {
           €{!props.data.availability && " out of order"}
         </p>
         <div>
-          <Button name={"Buy now"} padding={"10px 20px"} handleClick={handleClick} />
+          <Button
+            name={"Buy now"}
+            padding={"10px 20px"}
+            handleClick={handleClick}
+          />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     value: {
-        productToShow : {}, 
+        productToShow : null, 
         productsInCart : []
     },
    };
@@ -21,14 +21,14 @@ const initialState = {
       resetCart : (state, action) => {
         state.value.productsInCart = []
       }, 
-      productToShow : (state, action) => {
-        state.value.productShown = action.payload
+      selectProductToShow : (state, action) => {
+        state.value.productToShow = action.payload
       }, 
       resetProductToShow : (state, action) => {
-        state.value.productShown = {}
+        state.value.productToShow = {}
       }
     },
    });
 
-export const { addProductToCart, removeProductFromCart, resetCart, productToShow, resetProductToShow } = productsSlice.actions;
+export const { addProductToCart, removeProductFromCart, resetCart, selectProductToShow, resetProductToShow } = productsSlice.actions;
 export default productsSlice.reducer;
