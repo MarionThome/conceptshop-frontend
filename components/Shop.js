@@ -18,7 +18,7 @@ export default function Shop() {
     <main className={styles.main}>
       <Bubble top={"-350px"} left={"-350px"} rotate={10} />
       <NavBar />
-      <div className={styles.titleContainer}>
+      <div className={styles.content}>
         <div>
         <h1>Concept Store</h1>
         <h2> Anything.</h2>
@@ -27,6 +27,7 @@ export default function Shop() {
         <div className={styles.itemsContainer}>
             {productList}
         </div>
+      </div>
       <Bubble
         rotate={180}
         justify={"end"}
@@ -34,7 +35,6 @@ export default function Shop() {
         bottom={"-350px"}
         right={"-350px"}
       />
-      </div>
     </main>
   );
 }

@@ -15,7 +15,7 @@ export default function ProductSnapShot(props) {
   }, []);
 
   const handleClick = () => {
-    dispatch(selectProductToShow(props.data))
+    dispatch(selectProductToShow({...props.data, image : image}))
     router.push(`/product/`);
   };
 
