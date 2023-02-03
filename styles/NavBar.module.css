@@ -1,11 +1,13 @@
 .bar{
-    height : 7vh; 
+    height : 4rem; 
     display:flex; 
     width : 100%; 
     padding : 1vh; 
-    justify-content : right
+    justify-content : right;
+    align-items: center;
 }
 
-.bar * {
-    margin: 5px 20px ;
+.icons {
+    margin: 5px 20px;
+    cursor: pointer;
 }

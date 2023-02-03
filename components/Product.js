@@ -5,14 +5,27 @@ import NavBar from "./NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
+import { useDispatch } from 'react-redux';
+import { addProductToCart } from '../reducers/products';
+import CartModal from "./CartModal";
+import { useState } from "react";
 
 export default function Product() {
+    const [modalisVisible, setModalVisible] = useState(false)
+    const dispatch  = useDispatch()
   const productSelected = useSelector(
     (state) => state.products.value.productToShow
   );
 
+  const  handleClick = () => {
+    dispatch(addProductToCart(productSelected))
+    setModalVisible(true)
+  }
+
+
   return (
     <main className={styles.main}>
+    {modalisVisible && <CartModal name={productSelected.name}/>}
       <Bubble top={"-350px"} left={"-350px"} rotate={10} />
       <NavBar />
       <div className={styles.content}>
@@ -35,7 +48,10 @@ export default function Product() {
               </span>{" "}
               €{!productSelected.availability && " out of order"}
             </p>
-            <Button name ={"Add To Cart"}/>
+            <div className={styles.buttonHeart}>
+            <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginRight : "20px"}} cursor={"pointer"}/>
+            <Button name ={"Add To Cart"} padding={"10px 20px"} disabled = {!productSelected.availability && true} handleClick={handleClick}/>
+            </div>
             </div>
           </div>
         </div>
