@@ -16,9 +16,7 @@ export default function ProductSnapShot(props) {
 
   const handleClick = () => {
     dispatch(selectProductToShow(props.data))
-    setTimeout(() => {
-        router.push(`/product/`);
-    }, 500)
+    router.push(`/product/`);
   };
 
   return (
