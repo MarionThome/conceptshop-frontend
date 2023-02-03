@@ -12,7 +12,7 @@ export default function ProductSnapShot(props) {
   }, []);
 
   const handleClick = () => {
-    router.push("/product");
+    router.push(`/product/`);
   };
 
   return (

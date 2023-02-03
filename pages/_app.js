@@ -1,9 +1,29 @@
 import "../styles/globals.css";
 import Head from "next/head";
+import { Provider } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import products from "../reducers/products";
+import { PersistGate } from 'redux-persist/integration/react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
+const reducers = combineReducers({ products }); // permet d'enregistrer les reducers
+const persistConfig = { key: 'ConceptStore', AsyncStorage };
+
+// configuration du store
+const store = configureStore({
+ reducer: persistReducer(persistConfig, reducers),
+ middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+});
+
+const persistor = persistStore(store); // transforme le store pour qu'il soit persistant
+
 
 function App({ Component, pageProps }) {
   return (
-    <>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
       <Head>
         <title>Concept Store</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +34,8 @@ function App({ Component, pageProps }) {
         ></link>
       </Head>
       <Component {...pageProps} />
-    </>
+      </PersistGate>
+    </Provider>
   );
 }
 
