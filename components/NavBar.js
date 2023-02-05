@@ -15,12 +15,11 @@ config.autoAddCss = false; /* eslint-disable import/first */
 export default function () {
 const router = useRouter()
   const cart = useSelector((state) => state.products.value.productsInCart);
-  console.log(cart)
 
   return (
     <div className={styles.bar}>
       <FontAwesomeIcon icon={faUser} className={styles.icons} />
-      <FontAwesomeIcon icon={faHeart}  className={styles.icons} />
+      <FontAwesomeIcon icon={faHeart}  className={styles.icons} onClick={() => router.push("/favorites")}/>
       <div
         style={{
           display: "flex",

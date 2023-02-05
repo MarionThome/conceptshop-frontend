@@ -4,6 +4,7 @@ const initialState = {
   value: {
     productToShow: null,
     productsInCart: [],
+    favoriteProducts : [],
   },
 };
 
@@ -43,6 +44,16 @@ export const productsSlice = createSlice({
     resetProductToShow: (state, action) => {
       state.value.productToShow = {};
     },
+    productInFavs : (state, action) => {
+      console.log("PAYLOAD", action.payload)
+      if (
+        state.value.favoriteProducts && state.value.favoriteProducts.find((e) => e.name === action.payload.name)
+        ) {
+        state.value.favoriteProducts = state.value.favoriteProducts.filter((e) => e.name !== action.payload.name)
+      } else {
+        state.value.favoriteProducts.push(action.payload);
+      }
+    },
   },
 });
 
@@ -52,5 +63,7 @@ export const {
   resetCart,
   selectProductToShow,
   resetProductToShow,
+  productInFavs
+  
 } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -1,14 +1,18 @@
 import Button from "./Button";
+import { useSelector , useDispatch} from "react-redux";
+import { productInFavs} from '../reducers/products';
 import styles from "../styles/ProductSnapShot.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { selectProductToShow } from "../reducers/products";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductSnapShot(props) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [image, setImage] = useState("");
+
   useEffect(() => {
     const fileImg = require(`../assets/${props.data.name}.png`);
     setImage(fileImg.default.src);
@@ -43,6 +47,7 @@ export default function ProductSnapShot(props) {
             padding={"10px 20px"}
             handleClick={handleClick}
           />
+        {props.isInFav && <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginLeft : "20px"}} cursor={"pointer"} color={"#d4a054"} onClick={() => {dispatch(productInFavs(props.data))}}/>}
         </div>
       </div>
     </div>

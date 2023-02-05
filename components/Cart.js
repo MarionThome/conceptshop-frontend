@@ -14,7 +14,7 @@ export default function Cart() {
   const cart = useSelector((state) => state.products.value.productsInCart);
   const [products, setProducts] = useState([]);
 
-  console.log(cart);
+  console.log("CART", cart);
 
   useEffect(() => {
     setProducts(

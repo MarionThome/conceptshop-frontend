@@ -1,28 +1,40 @@
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import styles from "../styles/Product.module.css";
 import Bubble from "./Bubble";
 import NavBar from "./NavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
-import { useDispatch } from 'react-redux';
-import { addProductToCart } from '../reducers/products';
+import { addProductToCart, productInFavs} from '../reducers/products';
 import CartModal from "./CartModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Product() {
-    const [modalisVisible, setModalVisible] = useState(false)
-    const dispatch  = useDispatch()
+  const [isFav, setIsFav] = useState(false)
+  const [modalisVisible, setModalVisible] = useState(false)
+  const dispatch  = useDispatch()
+  
   const productSelected = useSelector(
     (state) => state.products.value.productToShow
   );
 
+  const favList = useSelector(
+    (state) => state.products.value.favoriteProducts
+  );
+  
+  console.log("selected", productSelected)
   const  handleClick = () => {
     if(productSelected !== null){
       dispatch(addProductToCart({...productSelected, quantity : 1}))
       setModalVisible(true)
     }
   }
+
+  useEffect(() => {
+    if (favList){
+      setIsFav(favList.find(e => e.name === productSelected.name))
+    }
+  }, [favList])
 
 
   return (
@@ -51,7 +63,7 @@ export default function Product() {
               €{!productSelected.availability && " out of order"}
             </p>
             <div className={styles.buttonHeart}>
-            <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginRight : "20px"}} cursor={"pointer"}/>
+            <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginRight : "20px"}} cursor={"pointer"} color={isFav && "#d4a054"} onClick={() => {dispatch(productInFavs(productSelected))}}/>
             <Button name ={"Add To Cart"} padding={"10px 20px"} disabled = {!productSelected.availability && true} handleClick={handleClick}/>
             </div>
             </div>
