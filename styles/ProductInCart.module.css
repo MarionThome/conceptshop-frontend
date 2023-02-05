@@ -1,0 +1,18 @@
+.productInCartContainer{
+    background-color: white;
+    display: flex;
+    max-width: 80%;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.productNameAndButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.productInCartContainer img {
+    width: 50%;
+}

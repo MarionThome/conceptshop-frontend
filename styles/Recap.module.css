@@ -1,0 +1,13 @@
+.recapContent{
+    background-color: white;
+    height: 100%;
+    padding: 2rem;
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.recapContent h1{
+    font-size: 3rem;
+    font-family: "DM Sans";
+    font-weight: 500;
+}

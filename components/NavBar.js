@@ -35,9 +35,7 @@ const router = useRouter()
             style={{ marginRight: "10px" }}
             onClick={() => router.push("/cart")}
           />
-        <p style={{ marginRight: "20px" }}>{cart.length > 0 ? cart.reduce((accumulator, currentValue) =>{
-            return accumulator + currentValue.quantity
-        }, 0) : 0}</p>
+        <p style={{ marginRight: "20px" }}> {cart.length}</p>
       </div>
     </div>
   );

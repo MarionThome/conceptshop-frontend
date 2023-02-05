@@ -18,8 +18,10 @@ export default function Product() {
   );
 
   const  handleClick = () => {
-    dispatch(addProductToCart({...productSelected, quantity : 1}))
-    setModalVisible(true)
+    if(productSelected !== null){
+      dispatch(addProductToCart({...productSelected, quantity : 1}))
+      setModalVisible(true)
+    }
   }
 
 
