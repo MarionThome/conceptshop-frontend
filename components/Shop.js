@@ -7,12 +7,18 @@ import products from "../products.json"
 
 
 export default function Shop() {
+  const [productList, setProductList] = useState([])
 
-    const [productList, setProductList] = useState([])
     useEffect(() => {
-    setProductList(products.map((data, i) =>
-        <ProductSnapShot data={data} key={i}/> ))
-    }, [])
+      fetch('http://localhost:3000/products/all', {
+        method : "GET", 
+        headers : { 'Content-Type': 'application/json' }
+      }).then(res => res.json()).then((data)=>{
+        setProductList(data.products.map((data, i) =>
+            <ProductSnapShot data={data} key={i}/> ))
+      })
+    }
+    , [])
 
   return (
     <main className={styles.main}>
