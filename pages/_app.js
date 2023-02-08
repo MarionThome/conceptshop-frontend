@@ -4,11 +4,12 @@ import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import products from "../reducers/products";
+import  user from "../reducers/user"
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 
 
-const reducers = combineReducers({ products }); // permet d'enregistrer les reducers
+const reducers = combineReducers({ products,  user }); // permet d'enregistrer les reducers
 const persistConfig = { key: 'ConceptStore', storage };
 
 // configuration du store

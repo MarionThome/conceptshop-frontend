@@ -18,7 +18,7 @@ const router = useRouter()
 
   return (
     <div className={styles.bar}>
-      <FontAwesomeIcon icon={faUser} className={styles.icons} />
+      <FontAwesomeIcon icon={faUser} className={styles.icons} onClick={() => router.push("/profile")}/>
       <FontAwesomeIcon icon={faHeart}  className={styles.icons} onClick={() => router.push("/favorites")}/>
       <div
         style={{

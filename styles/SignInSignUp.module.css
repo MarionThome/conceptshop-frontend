@@ -1,0 +1,28 @@
+.create_signIn{
+    display: flex;
+    justify-content: space-around;
+}
+
+.signInSignUpContent{
+    background-color: rgb(255,255,255, 0.8);
+    padding: 2rem;
+    border-radius: 50px;
+    z-index: 1000;
+}
+
+.inputContainer{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.labels{
+    font-size: 18px
+}
+
+.inputs{
+    margin-bottom: 2rem;
+    height: 3rem;
+    font-size: 1rem;
+}
