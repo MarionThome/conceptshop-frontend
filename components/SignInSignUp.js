@@ -123,13 +123,13 @@ export default function SignInSignUp() {
       <div className={styles.create_signIn}>
         <h2
           onClick={() => handleCreate()}
-          style={{ color: create ? "#2f356d" : "rgb(123,150,212, 0.5)" }}
+          style={{ color: create ? "#2f356d" : "rgb(123,150,212, 0.5)" , cursor : "pointer"}}
         >
           Create an account
         </h2>
         <h2
           onClick={() => handleLogIn()}
-          style={{ color: logIn ? "#2f356d" : "rgb(123,150,212, 0.5)" }}
+          style={{ color: logIn ? "#2f356d" : "rgb(123,150,212, 0.5)" , cursor : "pointer"}}
         >
           Sign In
         </h2>

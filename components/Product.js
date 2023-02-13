@@ -6,12 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import Button from "./Button";
 import { addProductToCart, productInFavs} from '../reducers/products';
-import CartModal from "./CartModal";
+import Modal from "./Modal";
 import { useEffect, useState } from "react";
 
 export default function Product() {
   const [isFav, setIsFav] = useState(false)
-  const [modalisVisible, setModalVisible] = useState(false)
+  const [modalisVisible, setModalVisible] = useState(false);
+  const [favInDataBase, setFavInDataBase] = useState([])
   const dispatch  = useDispatch()
   
   const productSelected = useSelector(
@@ -20,6 +21,10 @@ export default function Product() {
 
   const favList = useSelector(
     (state) => state.products.value.favoriteProducts
+  );
+
+  const userIsLogged = useSelector(
+    (state) => state.user.value
   );
   
   console.log("selected", productSelected)
@@ -39,7 +44,8 @@ export default function Product() {
 
   return (
     <main className={styles.main}>
-    {modalisVisible && <CartModal name={productSelected.name}/>}
+    {modalisVisible && <Modal name={'Cart_Modal'} message = {`Thank you ! ${productSelected.name} has been added to your cart !`}/>}
+    
       <Bubble top={"-350px"} left={"-350px"} rotate={10} />
       <NavBar />
       <div className={styles.content}>
