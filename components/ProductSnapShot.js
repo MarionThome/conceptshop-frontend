@@ -10,7 +10,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductSnapShot(props) {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const router = useRouter(); 
   const [image, setImage] = useState("");
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function ProductSnapShot(props) {
         </p>
         <div>
           <Button
-            name={"Buy now"}
+            name={props.buttonName || "Buy now"}
             padding={"10px 20px"}
             handleClick={handleClick}
           />

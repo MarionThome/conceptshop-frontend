@@ -2,13 +2,15 @@ import Bubble from "./Bubble";
 import NavBar from "./NavBar";
 import Button from "./Button";
 import SignInSignUp from "./SignInSignUp";
+import PastOrders from "./PastOrders";
+import ProfileInfo from "./profileInfo";
 import styles from "../styles/Profile.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { resetUser } from "../reducers/user";
+
 
 
 export default function Profile(props){
@@ -27,10 +29,6 @@ export default function Profile(props){
             setIsLogged(false)
         }
     },[user])
-
-    const handleLogOut = () => {
-        dispatch(resetUser())
-    }
     
     return(
         <main>
@@ -55,11 +53,14 @@ export default function Profile(props){
               return to the store
             </p>
           </div>
-          <div style={{width : "50%", margin : "auto"}}>
+          <div style={{width : !isLogged ? "50%" : "80%", margin : "auto", maxWidth : "1200px"}}>
             {!isLogged && <SignInSignUp />}
+            {isLogged && <div style = {{display : "flex", justifyContent : "space-around"}}>
+              <PastOrders userToken = {user.token}/>
+              <ProfileInfo/>
+              </div>}
           </div>
         </div>
-            {isLogged && <Button name="log out" padding={"10px 20px"} handleClick = {handleLogOut}/>}
       </div>
       <Bubble
         rotate={180}
