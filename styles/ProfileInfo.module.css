@@ -1,8 +1,27 @@
 .infoContent{
     background-color: white;
     height: 100%;
+    width: 20%;
     padding: 2rem;
     border-radius: 50px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infoContent img {
+    width: 100%;
+    border-radius: 50%;
+    border : 2px solid black;
+    margin-bottom: 1rem;
+}
+
+.infoContent h3 {
+    margin-bottom: 0;
+}
+
+.infoContent p{
+    margin-top: 0;
 }
