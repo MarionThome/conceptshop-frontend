@@ -45,7 +45,6 @@ export const productsSlice = createSlice({
       state.value.productToShow = {};
     },
     productInFavs : (state, action) => {
-      console.log("PAYLOAD", action.payload)
       if (
         state.value.favoriteProducts && state.value.favoriteProducts.find((e) => e.name === action.payload.name)
         ) {
@@ -54,6 +53,9 @@ export const productsSlice = createSlice({
         state.value.favoriteProducts.push(action.payload);
       }
     },
+    productInFavsFromDB : (state, action) => {
+      state.value.favoriteProducts = action.payload
+    }
   },
 });
 
@@ -63,7 +65,7 @@ export const {
   resetCart,
   selectProductToShow,
   resetProductToShow,
-  productInFavs
-  
+  productInFavs, 
+  productInFavsFromDB 
 } = productsSlice.actions;
 export default productsSlice.reducer;

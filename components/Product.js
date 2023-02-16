@@ -8,11 +8,12 @@ import Button from "./Button";
 import { addProductToCart, productInFavs} from '../reducers/products';
 import Modal from "./Modal";
 import { useEffect, useState } from "react";
+import { getFavoritesFromDB } from "../module/getFavoritesFromDB";
+
 
 export default function Product() {
   const [isFav, setIsFav] = useState(false)
   const [modalisVisible, setModalVisible] = useState(false);
-  const [favInDataBase, setFavInDataBase] = useState([])
   const dispatch  = useDispatch()
   
   const productSelected = useSelector(
@@ -23,11 +24,11 @@ export default function Product() {
     (state) => state.products.value.favoriteProducts
   );
 
-  const userIsLogged = useSelector(
+  const user = useSelector(
     (state) => state.user.value
   );
   
-  console.log("selected", productSelected)
+
   const  handleClick = () => {
     if(productSelected !== null){
       dispatch(addProductToCart({...productSelected, quantity : 1}))
@@ -36,10 +37,45 @@ export default function Product() {
   }
 
   useEffect(() => {
+    getFavoritesFromDB(user.username, user.token, dispatch)
+  }, [])
+
+  useEffect(() => {
     if (favList){
       setIsFav(favList.find(e => e.name === productSelected.name))
     }
   }, [favList])
+
+  const handleFav = () => {
+    if(!isFav && user.username){
+      fetch("http://localhost:3000/users/new-fav", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: user.token,
+          product: productSelected,
+        })}).then(res => res.json()).then((data) => {
+          console.log(data.result)
+        })
+      }
+      if(isFav && user.username){
+        console.log(productSelected._id)
+        fetch("http://localhost:3000/users/delete-fav", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: user.token,
+          id: productSelected._id,
+        })}).then(res => res.json()).then((data) => {
+   
+          if(data.result){
+            console.log(data.result)
+          }
+        })
+      }
+      dispatch(productInFavs(productSelected))
+    }
+  
 
 
   return (
@@ -69,7 +105,7 @@ export default function Product() {
               €{!productSelected.availability && " out of order"}
             </p>
             <div className={styles.buttonHeart}>
-            <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginRight : "20px"}} cursor={"pointer"} color={isFav && "#d4a054"} onClick={() => {dispatch(productInFavs(productSelected))}}/>
+            <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginRight : "20px"}} cursor={"pointer"} color={isFav && "#d4a054"} onClick={() => handleFav()}/>
             <Button name ={"Add To Cart"} padding={"10px 20px"} disabled = {!productSelected.availability && true} handleClick={handleClick}/>
             </div>
             </div>

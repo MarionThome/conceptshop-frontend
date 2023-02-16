@@ -3,17 +3,27 @@ import NavBar from "./NavBar"
 import styles from "../styles/Favorites.module.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
+import { productInFavsFromDB } from "../reducers/products";
 import ProductSnapShot from "./ProductSnapShot";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { getFavoritesFromDB } from "../module/getFavoritesFromDB";
+
 
 export default function Favorites(){
+  const dispatch = useDispatch()
     const [productList, setProductList] = useState([])
     const router = useRouter()
     const favList = useSelector(
         (state) => state.products.value.favoriteProducts
       );
+
+    const user = useSelector((state) => state.user.value)
+
+    useEffect(() => {
+      getFavoritesFromDB(user.username, user.token, dispatch)
+    }, [])
 
     useEffect(() => {
         if(favList){
@@ -21,6 +31,7 @@ export default function Favorites(){
             <ProductSnapShot data={data} key={i} isInFav={true} />))
         }
     }, [favList])
+
     return (
 
     <main>

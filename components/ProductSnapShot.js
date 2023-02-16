@@ -13,6 +13,10 @@ export default function ProductSnapShot(props) {
   const router = useRouter(); 
   const [image, setImage] = useState("");
 
+  const user = useSelector(
+    (state) => state.user.value
+  );
+
   useEffect(() => {
     const fileImg = require(`../assets/${props.data.name}.png`);
     setImage(fileImg.default.src);
@@ -22,6 +26,24 @@ export default function ProductSnapShot(props) {
     dispatch(selectProductToShow({...props.data, image : image}))
     router.push(`/product/`);
   };
+
+  const handleRemoveFromFav = () => {
+    if(user.username){
+      fetch("http://localhost:3000/users/delete-fav", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            token: user.token,
+            id: props.data._id,
+          })}).then(res => res.json()).then((data) => {
+     
+            if(data.result){
+              console.log(data.result)
+            }
+          })
+    }
+        dispatch(productInFavs(props.data))
+  }
 
   return (
     <div className={styles.infosContainer}>
@@ -47,7 +69,7 @@ export default function ProductSnapShot(props) {
             padding={"10px 20px"}
             handleClick={handleClick}
           />
-        {props.isInFav && <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginLeft : "20px"}} cursor={"pointer"} color={"#d4a054"} onClick={() => {dispatch(productInFavs(props.data))}}/>}
+        {props.isInFav && <FontAwesomeIcon icon={faHeart} size ={"2x"} style={{marginLeft : "20px"}} cursor={"pointer"} color={"#d4a054"} onClick={() => handleRemoveFromFav()}/>}
         </div>
       </div>
     </div>

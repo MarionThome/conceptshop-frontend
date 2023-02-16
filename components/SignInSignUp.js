@@ -89,7 +89,7 @@ export default function SignInSignUp() {
       })
         .then((res) => res.json())
         .then((data) => {
-        console.log(data)
+
         if(!data.result){
             setErrorMessage(data.error)
             return 
@@ -108,7 +108,6 @@ export default function SignInSignUp() {
       })
         .then((res) => res.json())
         .then((data) => {
-            console.log(data)
             if(!data.result){
                 setErrorMessage(data.error)
                 return

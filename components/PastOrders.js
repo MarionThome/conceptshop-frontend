@@ -5,7 +5,6 @@ import moment from "moment"
 
 export default function PastOrders(props) {
   const [pastOrders, setPastOrders] = useState([]);
-  console.log(props.orders)
 
   return (
     <div className={styles.main}>

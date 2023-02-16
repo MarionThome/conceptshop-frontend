@@ -10,7 +10,7 @@ export default function ProfileInfo(props){
     const [image, setImage] = useState(profilePic.src)
     const [favs, setFavs] = useState(0)
     const dispatch = useDispatch()
-    console.log(image)
+
     const handleLogOut = () => {
         dispatch(resetUser())
     }

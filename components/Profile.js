@@ -10,56 +10,78 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import moment from "moment"
+import { productInFavsFromDB } from "../reducers/products";
+
+import moment from "moment";
 
 export default function Profile(props) {
   const router = useRouter();
   const [isLogged, setIsLogged] = useState(false);
   const user = useSelector((state) => state.user.value);
-  const [pastOrders, setPastOrders] = useState([])
+  const [pastOrders, setPastOrders] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.username) {
       setIsLogged(true);
-
-      // Get Past Orders
-      fetch(`http://localhost:3000/users/past-orders/${user.token}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.result) {
-            setPastOrders(
-              data.orders.map((order) => {
-                return (
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div>
-                      <p>{moment(new Date(order.date)).format("DD/MM/YYYY")}</p>
-                      <p>
-                        Total: <span>{order.totalPrice} €</span>
-                      </p>
-                      <div>
-                        {order.products.map((item) => {
-                          return (
-                            <div>
-                              <ProductSnapShot data={item} buttonName="check" />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
-            );
-          }
-        });
+      getPastOrders();
+      
     } else {
       setIsLogged(false);
     }
   }, [user]);
+
+  if(user.username){
+  
+    fetch(`http://localhost:3000/users/favorites/${user.token}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          console.log(data);
+          dispatch(productInFavsFromDB(data.favorites));
+        }
+      });
+}
+
+
+  const getPastOrders = () => {
+    fetch(`http://localhost:3000/users/past-orders/${user.token}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          setPastOrders(
+            data.orders.map((order) => {
+              return (
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <div>
+                    <p>{moment(new Date(order.date)).format("DD/MM/YYYY")}</p>
+                    <p>
+                      Total: <span>{order.totalPrice} €</span>
+                    </p>
+                    <div>
+                      {order.products.map((item) => {
+                        return (
+                          <div>
+                            <ProductSnapShot data={item} buttonName="check" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          );
+        }
+      });
+  };
+
 
   return (
     <main>
@@ -99,7 +121,11 @@ export default function Profile(props) {
             {isLogged && (
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <PastOrders orders={pastOrders} />
-                <ProfileInfo ordersNum = {pastOrders.length} token = {user.token} username = {user.username}/>
+                <ProfileInfo
+                  ordersNum={pastOrders.length}
+                  token={user.token}
+                  username={user.username}
+                />
               </div>
             )}
           </div>

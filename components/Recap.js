@@ -23,7 +23,6 @@ export default function Recap(){
         cart.length > 0 && setTotalPrice(cart.reduce((acc, item) => {return (item.price * item.quantity) + acc}, 0))
     }, [cart])
     
-    console.log("TOTAL", totalPrice)
     return(
         <div className={styles.recapContent}>
             <h1> Recap </h1>
