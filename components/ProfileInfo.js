@@ -59,7 +59,7 @@ export default function ProfileInfo(props) {
         method : "GET",
         headers : { "Content-Type": "application/json" },
     }).then((res) => res.json()).then((data) => {
-        if(!data.result){
+        if(!data.result || data.profilePic === ""){
             return
         }
         console.log(data)
