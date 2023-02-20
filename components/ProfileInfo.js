@@ -4,7 +4,7 @@ import styles from "../styles/ProfileInfo.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { resetUser } from "../reducers/user";
 import profilePic from "../assets/profile.png";
-import { render } from "react-dom";
+
 
 export default function ProfileInfo(props) {
   const [image, setImage] = useState(profilePic.src);
@@ -32,9 +32,13 @@ export default function ProfileInfo(props) {
         method : "POST", 
         body : JSON.stringify({ file : img}), 
         headers: { "Content-Type": "application/json" }
-    }).then((data) => {
+    }).then(res => res.json()).then((data) => {
         if(data){
-            console.log("picture updated")
+            console.log("DATA", data.profilePic)
+            setImage(data.profilePic)
+            setTimeout(function(){
+                window.location.reload(false)
+            }, 300)
         }
     })
   }
@@ -51,6 +55,16 @@ export default function ProfileInfo(props) {
         }
         setFavs(data.favorites.length);
       });
+    fetch(`http://localhost:3000/users/profile-pic/${props.token}`, {
+        method : "GET",
+        headers : { "Content-Type": "application/json" },
+    }).then((res) => res.json()).then((data) => {
+        if(!data.result){
+            return
+        }
+        console.log(data)
+        setImage(data.profilePic)
+    })
   }, []);
 
   return (
