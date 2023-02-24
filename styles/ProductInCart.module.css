@@ -1,7 +1,7 @@
 .productInCartContainer{
     background-color: white;
     display: flex;
-    max-width: 80%;
+    width: 80%;
     align-items: center;
     margin-bottom: 2rem;
     border-radius: 50px;

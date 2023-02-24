@@ -56,7 +56,7 @@ export default function Profile(props) {
       .then((data) => {
         if (data.result) {
           setPastOrders(
-            data.orders.map((order) => {
+            data.orders.reverse().map((order) => {
               return (
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div>

@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import Button from "./Button";
 import styles from "../styles/Recap.module.css"
 
-export default function Recap(){
+
+export default function Recap(props){
     const [recapList, setRecapList] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
     const cart = useSelector((state) => state.products.value.productsInCart);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Recap(){
                 )
             }
         }))
-        cart.length > 0 && setTotalPrice(cart.reduce((acc, item) => {return (item.price * item.quantity) + acc}, 0))
+        
     }, [cart])
     
     return(
@@ -30,8 +30,8 @@ export default function Recap(){
                 {cart.length > 0 && recapList}
             </div>
             <h2>Total</h2>
-            <p> {totalPrice} € </p>
-            <Button name ={"Buy"} padding={"10px 50px"} backgroundColor={"#d4a054"} color={"white"} />
+            <p> {props.totalPrice} € </p>
+            <Button name ={"Buy"} padding={"10px 50px"} backgroundColor={"#d4a054"} color={"white"} handleClick = {props.handleBuy}/>
         </div>
     )
 }
